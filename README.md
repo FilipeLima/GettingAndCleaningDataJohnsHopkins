@@ -13,6 +13,6 @@ The first script you should run is `Setup Dataset.R`. That script will:
 
 After running `Setup Dataset.R`, you should run `run_analysis.R`. That script will:
 
--Import *features.txt* as `features` and simplify the variables names.
--- As `features` will have 2 columns, the first one will be erased.
-+ Using the function `gsub`, substitute and expand the variables names.
+- Import *features.txt* as `features` and simplify the variables names.
+  - As `features` will have 2 columns, the first one will be erased.
+  - Using the function `gsub`, substitute the short and abbreviated names to expand them to be more readable.
