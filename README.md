@@ -9,6 +9,8 @@ The first script you should run is `Setup Dataset.R`. That script will:
 - Unzip the dataset into *data* directory.
 - Rename the *UCI HAR Dataset* to *dataset* for simplicity purposes.
 
+**If you don't want to run `Setup Dataset.R`, you should put the necessary files in your working directory. They are listed below. Either way, the next script will work.**
+
 ## Second Script
 
 After running `Setup Dataset.R`, you should run `run_analysis.R`. That script will:

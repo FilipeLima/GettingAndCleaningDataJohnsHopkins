@@ -1,6 +1,11 @@
 library(dplyr)
 
-features <- read.table("./data/dataset/features.txt", quote="\"", comment.char="")
+if(!file.exists("./data/dataset/features.txt")){
+  features <- read.table("./features.txt", quote="\"", comment.char="")
+} else{
+  features <- read.table("./data/dataset/features.txt", quote="\"", comment.char="")
+}
+
 features$V1 <- NULL
 
 features$V2 <- gsub("^t","Time",features$V2)
@@ -31,20 +36,48 @@ features$V2 <- gsub("gravity","Gravity",features$V2)
 features$V2 <- gsub("Inds","Index",features$V2)
 
 
+if(!file.exists("./data/dataset/test/subject_test.txt")){
+  subject <- read.table("./subject_test.txt", quote="\"", comment.char="")
+} else{
+  subject <- read.table("./data/dataset/test/subject_test.txt", quote="\"", comment.char="")
+}
 
-subject <- read.table("./data/dataset/test/subject_test.txt", quote="\"", comment.char="")
-activity <- read.table("./data/dataset/test/y_test.txt", quote="\"", comment.char="")
-test <- read.table("./data/dataset/test/X_test.txt", quote="\"", comment.char="")
+if(!file.exists("./data/dataset/test/y_test.txt")){
+  activity <- read.table("./y_test.txt", quote="\"", comment.char="")
+} else{
+  activity <- read.table("./data/dataset/test/y_test.txt", quote="\"", comment.char="")
+}
+
+if(!file.exists("./data/dataset/test/X_test.txt")){
+  test <- read.table("./X_test.txt", quote="\"", comment.char="")
+} else{
+  test <- read.table("./data/dataset/test/X_test.txt", quote="\"", comment.char="")
+}
+
 names(test) <- features$V2
 
 testDataset <- data.frame(Subject=subject,Activity=activity,test)
 names(testDataset)[1] <- "Subject"
 names(testDataset)[2] <- "Activity"
 
+if(!file.exists("./data/dataset/train/subject_train.txt")){
+  subject <- read.table("./subject_train.txt", quote="\"", comment.char="")
+} else{
+  subject <- read.table("./data/dataset/train/subject_train.txt", quote="\"", comment.char="")
+}
 
-subject <- read.table("./data/dataset/train/subject_train.txt", quote="\"", comment.char="")
-activity <- read.table("./data/dataset/train/y_train.txt", quote="\"", comment.char="")
-train <- read.table("./data/dataset/train/X_train.txt", quote="\"", comment.char="")
+if(!file.exists("./data/dataset/train/y_train.txt")){
+  activity <- read.table("./y_train.txt", quote="\"", comment.char="")
+} else{
+  activity <- read.table("./data/dataset/train/y_train.txt", quote="\"", comment.char="")
+}
+
+if(!file.exists("./data/dataset/train/X_train.txt")){
+  train <- read.table("./X_train.txt", quote="\"", comment.char="")
+} else{
+  train <- read.table("./data/dataset/train/X_train.txt", quote="\"", comment.char="")
+}
+
 names(train) <- features$V2
 
 trainDataset <- data.frame(Subject=subject,Activity=activity,train)
@@ -54,9 +87,13 @@ names(trainDataset)[2] <- "Activity"
 
 totalDataset <- full_join(testDataset,trainDataset)
 
+if(!file.exists("./data/dataset/activity_labels.txt")){
+  activity_labels <- read.table(".//activity_labels.txt", quote="\"", comment.char="")
+} else{
+  activity_labels <- read.table("./data/dataset/activity_labels.txt", quote="\"", comment.char="")
+}
 
 
-activity_labels <- read.table("./data/dataset/activity_labels.txt", quote="\"", comment.char="")
 change_name <- function(x){
   activity_labels[activity_labels$V1==x,2]  
 }
@@ -71,6 +108,11 @@ averageDataset <- aggregate(mean_sd_Dataset[,-c(1:2)],by=list(mean_sd_Dataset$Ac
 names(averageDataset)[1] <- "Activity"
 names(averageDataset)[2] <- "Subject"
 
-write.table(averageDataset,file="./output/finalproject.txt",row.names = F)
+if(!file.exists("./output")){
+  write.table(averageDataset,file="./finalproject.txt",row.names = F)
+} else{
+  write.table(averageDataset,file="./output/finalproject.txt",row.names = F)
+}
+
 
 
