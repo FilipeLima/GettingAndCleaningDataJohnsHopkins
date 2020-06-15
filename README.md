@@ -30,3 +30,9 @@ After running `Setup Dataset.R`, you should run `run_analysis.R`. That script wi
   - Rename the `train` variables using `features`.
   - Create `trainDataset` using `subject`, `activity`, and `train`. 
   - Rename the first variable of `trainDataset` is `Subject`and the second is `Activity`.
+- Use the `full_join()` function to create `totalDataset`, mergin `testDataset` and `trainDataset`.
+- Import *./data/dataset/activity_labels.txt* as `activity_labels`. There will be two variables, `V1` and `V2`, with the number of the activity and its correspondent name. It will use those same names to change `totalDataset$Activity`.
+  - Create a function `change_name` to put the names of the activities using its correspondent numbers. 
+- Create the dataframe `mean_sd_Dataset` using the variables `Subject`, `Activity` and all the other variables that have either *Mean* or *Standard* in its name.
+- Create the dataframe `averageDataset` using the mean of all the variables from `mean_sd_Dataset` but the first two (Subject and Activity). The function `aggregate` was used to do that.
+- Finally, using `write_table`, save the `averageDataset` in *./output/finalproject.txt*.
