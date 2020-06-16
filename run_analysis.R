@@ -84,8 +84,8 @@ trainDataset <- data.frame(Subject=subject,Activity=activity,train)
 names(trainDataset)[1] <- "Subject"
 names(trainDataset)[2] <- "Activity"
 
-
 totalDataset <- full_join(testDataset,trainDataset)
+
 
 if(!file.exists("./data/dataset/activity_labels.txt")){
   activity_labels <- read.table(".//activity_labels.txt", quote="\"", comment.char="")
@@ -97,6 +97,7 @@ if(!file.exists("./data/dataset/activity_labels.txt")){
 change_name <- function(x){
   activity_labels[activity_labels$V1==x,2]  
 }
+
 totalDataset$Activity <- sapply(totalDataset$Activity,change_name)
 
 mean_sd_Dataset <- totalDataset[,grepl("(Mean|Standard|Activity|Subject)",names(totalDataset),ignore.case = T)]
@@ -107,12 +108,13 @@ averageDataset <- aggregate(mean_sd_Dataset[,-c(1:2)],by=list(mean_sd_Dataset$Ac
 
 names(averageDataset)[1] <- "Activity"
 names(averageDataset)[2] <- "Subject"
+names(averageDataset) <- gsub("\\.\\.","\\.",names(averageDataset))
+names(averageDataset) <- gsub("\\.$","",names(averageDataset))
 
 if(!file.exists("./output")){
   write.table(averageDataset,file="./finalproject.txt",row.names = F)
 } else{
   write.table(averageDataset,file="./output/finalproject.txt",row.names = F)
 }
-
 
 

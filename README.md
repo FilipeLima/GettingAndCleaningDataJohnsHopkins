@@ -1,5 +1,7 @@
-# GettingAndCleaningDataJohnsHopkings
-The repository for the project of the Getting And Cleaning Data Course from the Johns Hopkings Data Science Specialization
+# GettingAndCleaningDataJohnsHopkins
+
+The repository for the project of the Getting And Cleaning Data Course from the Johns Hop
+kings Data Science Specialization
 
 ## First Script
 The first script you should run is `Setup Dataset.R`. That script will:
@@ -37,4 +39,5 @@ After running `Setup Dataset.R`, you should run `run_analysis.R`. That script wi
   - Create a function `change_name` to put the names of the activities using its correspondent numbers. 
 - Create the dataframe `mean_sd_Dataset` using the variables `Subject`, `Activity` and all the other variables that have either *Mean* or *Standard* in its name.
 - Create the dataframe `averageDataset` using the mean of all the variables from `mean_sd_Dataset` but the first two (Subject and Activity). The function `aggregate` was used to do that.
+- A last filter in the names of the variables.
 - Finally, using `write_table`, save the `averageDataset` in *./output/finalproject.txt*.
